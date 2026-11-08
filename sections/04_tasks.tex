@@ -1,0 +1,137 @@
+\section{Tasks and Evaluation}
+\label{sec:tasks}
+
+% Original scaffold TODOs: task inputs, outputs, capabilities, construction, metrics, ambiguity.
+We propose two core tasks and one exploratory relation task.
+All task settings below are design proposals; no performance has been measured.
+\todo{Confirm the final task set and freeze the annotation schema before test construction.}
+
+\subsection{Cultural Cue Recognition}
+\label{sec:cue-task}
+\paragraph{Input and output.}
+The input is a video unit with the modalities specified by its evaluation condition.
+The output is a set of records $\{(c_i,A_i,k_i)\}$, where $c_i$ is a cue concept, $A_i$ is its set of cultural associations, and $k_i$ is its component type.
+For this core task, the working proposal aggregates repeated occurrences
+by concept within the evaluation unit and records their supported
+associations together. The relation task retains separate instance
+identifiers; recognition alone does not recover those bindings.
+The main condition does not supply the expected cues, a search query, or an uploader title.
+The model may return an empty set or state that the available evidence does not support a more specific association.
+
+\paragraph{Ability measured.}
+The task tests whether the model preserves distinct cultural associations within one scene or event.
+A correct event location does not substitute for a correct association of each practice or artifact.
+An association can be shared by several communities and should not be forced into a single-country answer.
+
+\paragraph{Construction and scoring.}
+The proposed reference uses canonical cue identifiers with accepted aliases.
+Predicted and reference cue records are aligned one-to-one by concept identifier; repeated identical records count as extra predictions.
+Cue precision, recall, and F1 measure discovery.
+Association-set F1 and component accuracy are reported on matched cues, alongside end-to-end record F1 requiring the concept, association set, and component to be correct.
+This prevents conditional scores from concealing missed cues.
+We also report macro averages by cultural association and domain with the corresponding sample counts.
+\todo{Confirm concept-level aggregation versus instance-level recognition; define aliases, acceptable association sets, and adjudication of open-vocabulary answers.}
+
+\subsection{Cue-Modality Attribution}
+\label{sec:modality-task}
+\paragraph{Input and output.}
+The model receives a video and a validated cue identifier or short description.
+It predicts the set of evidence channels that support that cue in the supplied input.
+An empty set is valid when the supplied condition contains no supporting evidence.
+The candidate channels are visual appearance, visual action, music or other non-speech sound, speech, and visible text.
+An externally supplied subtitle or transcript has its own label when that input is available.
+\todo{Validate channel boundaries and whether appearance/action should be separate subclasses of the visual modality.}
+
+\paragraph{Ability measured.}
+The task assesses attribution of an interpretation to observable evidence.
+The presence of music alone does not establish that music supports the cultural label.
+Annotators must identify a relevant passage, action, object, or sound and explain its connection to the cue.
+A textual assertion inside a video is distinguished from a direct depiction of the practice.
+Providing the cue isolates evidence attribution from cue-discovery errors.
+An end-to-end condition can later use predicted cues.
+
+\paragraph{Scoring and controls.}
+The proposed metrics are micro-F1, macro-F1, and exact-set match over channel labels.
+Gold evidence records support auditing of these labels, but precise temporal localization is not required by the core task.
+A cue-description-only baseline tests whether the answer can be guessed from the concept rather than the video.
+Matched cases in which the same cue is supported by different channels provide a stronger test.
+\todo{Specify evidence granularity and the manual procedure for determining that a channel supports a cue.}
+
+\subsection{Candidate: Relation Frames and Roles}
+\label{sec:relation-task}
+\paragraph{Input and output.}
+The initial pairwise setting supplies a video and two validated target nodes in random order.
+A node may be a cultural cue or an identified entity, event, or context participating in its realization.
+Any cultural association of a carrier or context requires its own evidence.
+The model outputs a relation frame and an assignment of node identifiers to that frame's roles.
+For symmetric frames, argument order has no effect on correctness.
+An insufficient-evidence answer is allowed when the input cannot establish the relation.
+This is a classification task over situated elements, not over country names.
+\todo{Confirm the node types and whether relations with more than two participants require an explicit result node or an event-level record.}
+
+\paragraph{Candidate frames.}
+The following inventory is provisional:
+\begin{description}
+    \item[Co-presence.] Two \emph{participants} share a coherent scene or event. This relation alone makes no claim about their integration.
+    \item[Embedding.] An \emph{element} occurs within a receiving \emph{context}, such as an event, institution, or place.
+    \item[Realization.] A cultural \emph{form} is performed, worn, made, or enacted by a \emph{carrier}.
+    \item[Incorporation.] A \emph{component} becomes part of an identifiable \emph{base} artifact or practice.
+    \item[Derivation.] A \emph{source} work or repertoire is expressed through a \emph{derivative} realization.
+    \item[Synthesis.] Two \emph{contributors} form an integrated result without a stable component--base distinction. The pairwise setting treats the result as event context.
+\end{description}
+Co-presence and the contributor roles of synthesis are symmetric.
+The other frames have different role slots.
+For example, incorporation assigns a textile to the component role and a garment to the base role; reversing these assignments changes the claim.
+The ordering is a representation convention, not a measure of dominance or historical transfer.
+% Conflict from prior discussion: a five-frame option merges realization into embedding.
+\todo{Test six frames against the five-frame alternative that merges embedding and realization; confirm whether synthesis can be annotated reliably.}
+
+\paragraph{What counts as a gold relation.}
+Multiple relations may hold for one pair or one video.
+The annotation should retain all supported frames rather than force one primary label.
+Under this working convention, co-presence may accompany a more specific
+frame. Established coexistence is distinct from insufficient evidence to
+identify an event or its participants.
+For an initial diagnostic, we propose a target-frame decision followed by role binding.
+Joint prediction can then return a set of supported frame--role records.
+Derivation requires evidence of a source relationship; resemblance alone is insufficient.
+Cases requiring external provenance belong in a separately specified metadata condition.
+\todo{Choose between a set-valued joint task and a curated single-relation subset; decide whether co-presence is independent or only a fallback, and define ambiguity and multiple valid answers.}
+
+\paragraph{Diagnostic settings.}
+In \emph{oracle-frame role binding}, the gold frame and target nodes are provided, and the model fills the roles.
+In \emph{joint frame and role classification}, target nodes are provided and both the frame and roles are predicted.
+The first setting separates role confusion from frame confusion.
+Node descriptions must not state the target relation.
+Because semantic types such as ``troupe'' and ``dance'' can still reveal roles, a node-text-only baseline is essential.
+High oracle accuracy alone does not demonstrate video understanding.
+\todo{Construct balanced node pairs and matched video alternatives to measure gains beyond description-only prediction.}
+
+\paragraph{Metrics.}
+For a single target relation, joint exact match requires the frame and every role to be correct.
+Frame macro-F1 and oracle-frame role accuracy provide component scores.
+If multiple relations are allowed, record precision, recall, and F1 are computed after one-to-one matching, with exact set match reported separately.
+Symmetric role permutations are treated as equivalent.
+Swap consistency checks that changing node order preserves the semantic prediction.
+It is reported alongside accuracy because a consistently wrong model can still pass this check.
+\todo{Freeze the primary relation metric after the annotation pilot and specify the treatment of abstention.}
+
+\subsection{Optional Tasks and Evaluation Protocols}
+\label{sec:optional-tasks}
+Temporal evidence grounding would return a set of intervals for a named cue, extending the localization setting of Cultural Moment Benchmark \citep{satar-etal-2026-cultural}.
+Repeated appearances should be separate spans, not one interval covering unrelated content.
+One-to-one span matching at a stated temporal IoU threshold supports precision, recall, and F1.
+Spatial grounding would be limited to cues with localizable visible regions, following the recognition--grounding distinction in Seeing Culture \citep{satar-etal-2025-seeing}.
+\todo{Decide whether to annotate either grounding task and set its evaluation thresholds.}
+
+Cross-language consistency would use validated translations of the same question about the same video, informed by multilingual cultural QA and aligned evaluation \citep{romero2024cvqa,zheng-etal-2026-mmac}.
+Agreement and joint correctness should both be reported.
+Context robustness would compare matched instances of a practice in different contexts.
+Natural recordings can support matched comparisons, but do not isolate the causal effect of context if performers, camera views, and actions also differ.
+\todo{Select at most one primary diagnostic extension and establish matched-pair controls.}
+
+Compositional generalization is a split strategy rather than an additional annotation task.
+A held-out culture pair or cue--frame combination should use components that each appear in development data.
+All versions of one recording and related event must remain in the same split.
+For pretrained models, ``unseen'' refers only to the benchmark's declared partitions; it does not establish absence from pretraining.
+\todo{Choose a test-only or train/development/test release and verify support for each held-out composition.}

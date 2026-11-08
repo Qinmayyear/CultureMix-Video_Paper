@@ -1,0 +1,38 @@
+\section{Experimental Setup}
+\label{sec:experiments}
+
+\subsection{Models and Baselines}
+% Original placeholder retained: \todo{Describe the evaluated systems and justify the baseline selection.}
+This section specifies a model-selection plan. No experiments have been completed for this draft. We propose a small set that separates visual understanding from native audiovisual understanding. Qwen2.5-VL-7B-Instruct~\citep{bai2025qwen25vl} and InternVL3.5-8B~\citep{wang2025internvl35} are candidate open visual baselines. Qwen2.5-Omni-7B~\citep{xu2025qwen25omni} is a candidate native audiovisual baseline. Their purpose is to provide reproducible reference systems with different input capabilities; this shortlist does not claim to cover the strongest available models.
+
+We also propose one proprietary video-capable API, with an additional native audiovisual API only if needed to cover that input setting. \todo{Confirm the final models, exact checkpoint revisions, proprietary API snapshot identifiers, access conditions, and inference budget.} Model selection will be frozen before the main evaluation. A model without native audio input will not be presented as an audiovisual baseline simply because it receives a transcript.
+
+\subsection{Input Conditions and Diagnostic Controls}
+We propose modality-separated evaluation, following the general distinction used in v-HUB~\citep{shi2025vhub}. The \textbf{V} condition provides silent video frames. Text embedded in those frames remains visible. The \textbf{VA} condition provides frames and native audio to models that support both. The \textbf{T} condition provides supplied text, such as a controlled description or cue list, with no frames or audio. T is a diagnostic condition whose construction remains to be decided, rather than a substitute for audiovisual evaluation. \todo{Confirm the input conditions and the content and authorship of supplied text.}
+
+Externally extracted speech transcripts or OCR outputs constitute separate \emph{ASR/OCR-assisted} conditions. Video titles, descriptions, and other source metadata would likewise belong to an explicitly identified metadata-assisted condition. These inputs must not be silently added to V or VA. Any comparison of V and VA should use the same clips and model where possible; comparisons between different models cannot isolate the effect of audio alone.
+
+Reference labels should be condition-specific. A cue supported only by
+audio should not count as an ordinary recognition miss in V. We propose
+scoring claims supported by the supplied modalities and reporting excluded
+or unanswerable items separately. An oracle cue may have an empty evidence
+set after the supporting channel is removed.
+\todo{Define modality-specific answerability, reference masks, and coverage reporting before evaluation.}
+
+If the candidate relation task is retained, we propose both an
+\emph{oracle-node} diagnostic, in which annotated target nodes are supplied,
+and a candidate \emph{end-to-end} condition, in which the model identifies
+instances before predicting relations. These answer different questions:
+reasoning over known elements versus recovering the full structure from
+video. The latter requires instance resolution beyond the concept-level
+recognition task. A \emph{node-text-only} control will test how much relation
+information is already exposed by supplied names or descriptions. Oracle
+prompts should omit relation labels, role labels, and explanatory notes
+that reveal the target. Even neutral descriptions may make roles
+predictable, so this control is necessary before interpreting oracle
+performance as video reasoning.
+\todo{Confirm oracle input fields, instance-resolution outputs, the leakage control, and whether to retain the end-to-end relation condition.}
+
+\subsection{Implementation Details}
+% Original placeholder retained: \todo{Document prompts, decoding settings, model versions, and evaluation procedures needed for reproducibility.}
+Implementation remains pending. \todo{Specify frame sampling and resolution, audio processing, context and output budgets, prompts, decoding settings, software versions, hardware, and cost.} These settings should be reported for each model and condition, including unsupported inputs and any truncation. Task metrics are proposed in Section~\ref{sec:tasks}; result tables and claims about model capabilities will be added only after evaluation.

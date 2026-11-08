@@ -1,0 +1,69 @@
+\section{Additional Benchmark Details}
+\label{sec:appendix-benchmark}
+
+\todo{Add supplementary examples, annotation instructions, prompts, and extended results as they become available.}
+
+\subsection{Proposed Annotation Record}
+\label{sec:annotation-record}
+The record below specifies proposed fields rather than completed
+annotations. \todo{Freeze field names and allowed values after the pilot.}
+
+\paragraph{Source and event.}
+Store the source identifier and URL, collection date, query provenance,
+license or permission evidence, event-group identifier, and the original
+start and end times of the evaluation unit. Record native audio,
+embedded text, supplied subtitles, and unavailable content separately.
+An event description should report what happens before cultural
+interpretation is added.
+
+\paragraph{Cue instance.}
+Assign a stable identifier to each cue. Store its description, canonical
+concept and aliases, component type, and one or more supported cultural
+associations. Record the basis of each association and an uncertainty
+flag. Evidence consists of channel labels and a set of time intervals;
+optional image regions can support visually localized cues. A channel
+should be marked only when it supports the specified cue, rather than
+merely being present in the video.
+
+\paragraph{Relation instance.}
+Store the identifiers of participating cues, entities, or contexts, a
+candidate relation frame, and the assignment of node identifiers to its roles.
+Any cultural association attached to an entity or context needs a separate
+evidence record. \todo{Confirm the node schema and treatment of integrated results.}
+Record whether the relation is symmetric and whether the judgment is
+supported by audiovisual evidence, additional metadata, or neither.
+The ordering of node identifiers is not a semantic direction. Preserve
+the evidence supporting the relation itself, since evidence that two
+cues exist does not necessarily explain how they are connected.
+
+\subsection{Boundary Cases for Adjudication}
+\label{sec:boundary-cases}
+The following cases should be included in the annotation pilot:
+
+\begin{itemize}
+    \item A recognizable practice occurs in a different country, but no
+    cue in the video identifies the receiving context. This may require
+    metadata and should not receive an unsupported audiovisual label.
+    \item Two traditions share a practice. Several valid associations
+    for that practice do not alone establish cultural mixing.
+    \item Two forms appear successively in unrelated montage shots.
+    Temporal proximity alone does not establish a shared event.
+    \item A component is integrated into a base form, but the base cannot
+    be identified reliably. Annotators should record the uncertainty
+    rather than assign direction from the query order.
+    \item A narrative adaptation is recognizable only from its title.
+    The source--derivative relation belongs to the metadata-assisted
+    condition unless the audiovisual evidence independently supports it.
+\end{itemize}
+
+\subsection{Protocol and Release Audit}
+\label{sec:release-audit}
+Before fixing the test set, the authors should verify that each gold
+claim has an evidence record, each external cultural association has a
+documented basis, and each released asset has an appropriate rights
+record. Adjudication should retain the original judgments, disagreement
+reason, final decision, and decision date. Related events and reuploads
+must remain in the same split. The protocol should record any exclusions
+made after model evaluation so that the test set is not silently changed
+in response to model errors.
+\todo{Add the final annotation manual, representative adjudicated examples, split manifest, and release audit.}

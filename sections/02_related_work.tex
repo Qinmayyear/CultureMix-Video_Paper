@@ -1,0 +1,74 @@
+\section{Related Work}
+\label{sec:related-work}
+
+% Original scaffold TODO: organize prior work by theme and explain differences.
+
+\subsection{Cultural Knowledge and Evidence}
+Cultural question answering tests knowledge that general visual benchmarks may not cover.
+CulturalVQA contains 2,378 image--question pairs from 11 countries, with questions about food, clothing, drinks, rituals, and traditions \citep{nayak-etal-2024-benchmarking}.
+CVQA expands multilingual coverage through locally authored visual questions and English versions \citep{romero2024cvqa}.
+GIMMICK combines six tasks across three datasets to examine cultural knowledge through different modalities and geographic information \citep{schneider-etal-2025-gimmick}.
+These benchmarks make cultural coverage an explicit evaluation concern.
+Country or language indexes are useful for organizing data, but do not require every depicted element to have one exclusive national association.
+Our proposed annotation instead attaches supported associations to individual cue instances.
+
+Several works separate recognition from other forms of evidence.
+Seeing Culture first tests visual cultural recognition and then artifact segmentation \citep{satar-etal-2025-seeing}.
+BLEnD-Vis aligns region-to-entity and entity-to-region question formats across text and images \citep{tan-etal-2026-blend}.
+MMAC evaluates cultural grounding with aligned text, image, and speech inputs, including consistency across languages and modalities \citep{zheng-etal-2026-mmac}.
+These are direct precedents for evidence-sensitive evaluation.
+Our cue-modality task asks a narrower question: which channels in a particular video support a specified cue?
+This differs from comparing overall answer accuracy after changing the input modality.
+We therefore do not claim that multimodal cultural evaluation itself is new.
+
+\subsection{Cultural Video Understanding and Generation}
+ViMUL-Bench evaluates multilingual video understanding with multiple-choice and open-ended questions across cultural and general categories \citep{shafique-etal-2025-culturally}.
+MINERVA-Cultural, published as CURVE, focuses on long-video reasoning with human-authored native-language questions, answers, and reasoning traces across 18 locales \citep{Singh_2026_CVPR}.
+% arXiv:2601.10649v2 uses MINERVA-Cultural; the verified CVPR entry uses CURVE.
+% Paper and repository QA counts differ; see notes/REFERENCE_AUDIT_CULTURE.md.
+These benchmarks motivate evaluation beyond English and short, visually obvious events.
+Our proposed tasks complement their question-answering settings by explicitly separating cue discovery, evidence attribution, and relations between elements.
+
+The Cultural Moment Benchmark separates concept naming, visual recognition, and temporal localization \citep{satar-etal-2026-cultural}.
+Its stages select a concept name from four options, select a matching video moment, and predict start and end times in a different example video.
+Its 306 concepts cover seven Southeast Asian countries.
+This staged design provides a useful precedent for isolating errors.
+For CulMix-Video, temporal grounding remains optional.
+If adopted, it must represent repeated cue appearances with multiple intervals, rather than assume one continuous span for each cue.
+
+CultureVidBench evaluates text-to-video generation using 1,000 prompts spanning 12 countries and 14 cultural aspects \citep{han-etal-2026-culturevidbench}.
+Its evaluation considers visual, textual, and audio cultural details.
+When Cultures Move studies mono-cultural and cross-cultural generated videos, including combinations of people, actions, and locations \citep{li-etal-2026-cultures}.
+These works show that cultural video evaluation already includes multiple modalities and mixed contexts.
+Our intended setting is interpretation of collected videos, with evidence annotations for the relations that a model is asked to predict, rather than assessment of a generator's response to a cultural prompt.
+
+\subsection{Cultural Mixing and Compositional Evaluation}
+CultureMix directly studies cultural mixing in images \citep{Kim_2026_CVPR}.
+It contains approximately 23,000 generated and human-verified food images in four settings: food alone, multiple foods, food with a cultural background, and multiple foods with a cultural background.
+Its evaluation tests whether individual food and cultural labels remain consistent across these settings.
+This is the closest motivation for preserving component identity when several cultural cues occur together.
+CulMix-Video extends the research question to temporal and audiovisual evidence, including changes in social setting or carrier without requiring technical fusion.
+Its candidate role task additionally asks how the elements participate in the observed event.
+Neither dataset labels nor role order alone establish the historical origin of a cultural practice.
+
+Winoground tests whether models distinguish image--caption pairings when captions use the same words in different orders \citep{thrush_and_ross2022winoground}.
+This motivates controls that keep the element inventory similar while changing the relation.
+Such controls would be valuable for our candidate role task because cue names can otherwise reveal the answer.
+Natural videos of the same practice in different contexts provide useful comparisons, but are not controlled causal counterfactuals.
+Our planned robustness and compositional diagnostics retain this distinction.
+
+\subsection{Visual Relations and Semantic Roles}
+Visual relationship detection predicts object--predicate--object relations in images \citep{lu2016visual}.
+Visual Genome provides dense object, attribute, and relation annotations \citep{krishna2017visualgenome}.
+ImageNet-VidVRD and VidOR extend relation annotation to videos with object trajectories and temporal intervals \citep{shang2017video,shang2019annotating}.
+These works establish precedents for ordered arguments and localized relation evidence.
+They do not by themselves define which cultural associations should be assigned to an entity or how shared traditions should be handled.
+
+Semantic role labeling offers a complementary model.
+imSitu represents an activity through role-filled participants \citep{Yatskar_2016_CVPR}; SWiG adds spatial grounding \citep{pratt2020grounded}.
+VidSitu extends semantic roles to video, including entity coreference and relations between events \citep{Sadhu_2021_CVPR}.
+M2E2 studies event and argument extraction across news images and text \citep{li-etal-2020-cross}.
+Together, these works motivate relation-specific roles and explicit evidence records.
+For CulMix-Video, a component and its base artifact, or a practice and its carrier, occupy different roles.
+This is more general than declaring one country the source and another the target of every mixed scene.
+The cultural relation inventory remains a proposal that requires annotation validation; the cited tasks provide representational precedents, not evidence that our labels are already reliable.

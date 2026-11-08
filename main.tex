@@ -1,0 +1,52 @@
+\documentclass[11pt]{article}
+
+% Use "review" for anonymous submission and "final" for camera-ready.
+\usepackage[review]{acl}
+
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+% Draft-only marker. Remove all TODOs before submission.
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+
+% Previous working title: CultureMix-Video: A Benchmark for Cultural Understanding in Videos.
+% Naming is provisional; keep one short form throughout this draft.
+\newcommand{\benchmark}{CulMix-Video}
+\title{CulMix-Video: Evaluating Cultural Cues and Their Relations in Video}
+
+% Author information is hidden automatically in review mode.
+\author{Anonymous Authors}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{sections/00_abstract}
+\end{abstract}
+
+\input{sections/01_introduction}
+\input{sections/02_related_work}
+\input{sections/03_benchmark}
+\input{sections/04_tasks}
+\input{sections/05_experiments}
+\input{sections/06_analysis}
+% Keep the concluding design statement before the unnumbered closing sections.
+\input{sections/09_conclusion}
+\input{sections/07_ethics}
+\input{sections/08_limitations}
+
+\bibliography{references}
+
+\appendix
+\input{sections/10_appendix}
+
+\end{document}

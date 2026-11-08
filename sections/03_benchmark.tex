@@ -1,0 +1,153 @@
+\section{Benchmark Motivation and Construction}
+\label{sec:benchmark}
+
+\subsection{Scope and Definitions}
+% Original scaffold TODO: Define the cultural knowledge and video understanding
+% abilities evaluated by the benchmark, including what is outside its scope.
+We study how models interpret cultural elements when their surrounding
+context does not point to a single cultural association. A performance can
+retain a recognizable form while its performers, music, or social purpose
+change. The same problem arises when a garment combines a familiar shape
+with another textile tradition, or when a food practice enters a different
+ceremonial setting. Recognizing each element and explaining its role are
+separate requirements.
+
+\paragraph{Culture and cultural association.}
+We use \emph{culture} operationally to refer to learned and shared practices,
+material expressions, and meanings associated with communities and
+traditions. This definition supports annotation of observable examples; it
+does not treat a culture as a fixed list of national traits. A
+\emph{cultural association} links an observed element to a documented
+tradition, community, region, or cultural context. Several associations may
+be valid. A national label does not establish exclusive ownership,
+historical origin, or the identity of the people in a video.
+A carrier or receiving context may have a documented cultural association,
+but appearance alone is not evidence of a person's affiliation.
+\todo{Confirm the cultural descriptors and references used to validate associations.}
+
+\paragraph{Cue, component, and evidence.}
+A \emph{cultural cue} is a particular element in a video that supports a
+cultural interpretation. Its \emph{component type} describes what the
+element is, such as a practice, movement, musical element, garment,
+language, setting, or social interaction. Its \emph{evidence channel}
+records where the supporting information appears: visual appearance,
+visual action, non-speech audio, speech, or visible text. For example, a
+musical practice is a component, while the sound recording is an evidence
+channel. Expert knowledge may be needed to connect the observed element
+to a tradition; such knowledge should be documented separately from the
+observation itself.
+
+\paragraph{Cultural mixing.}
+We define a cultural-mixing example as a scene or coherent event containing
+distinguishable elements associated with different cultural contexts.
+These may be two cultural cues, or a cue and a separately documented
+carrier or receiving context. A change in performers or setting can
+therefore qualify without changing the form itself. This includes
+coexistence, component incorporation, and adaptation or fusion.
+Technical fusion is therefore not required. However, a compilation that
+places unrelated clips next to each other does not by itself establish a
+mixed event. Nor does assigning several valid cultural labels to one cue
+automatically create multiple cue instances.
+The sample's inclusion and a task's available evidence are separate:
+claims requiring external provenance are evaluated only when that
+information is supplied in a declared metadata-assisted condition.
+\todo{Validate these inclusion boundaries on examples with shared traditions and overlapping contexts.}
+
+\paragraph{What the benchmark measures.}
+In this paper, \emph{cultural understanding} means recognizing culturally
+associated elements, identifying evidence for them, and, in the candidate
+relation task, assigning their roles within the observed event. We do not
+measure a model's cultural identity, values, authenticity judgments, or
+ability to determine cultural ownership. Historical influence and creator
+intent are outside the primary V and VA tasks unless separate evidence is given.
+
+% The supplied world-modelling guidelines motivate attention to activities,
+% local practices, and overlapping region/language labels. Their 8--15 second
+% limit, prefix/suffix prediction, and single-category rule are not adopted.
+The working scope extends beyond the initial performing-arts search pilot
+to food practices, clothing and materials, crafts, architecture and
+decoration, rituals, and media adaptations.
+\todo{Confirm the final domain list, cultural coverage, and feasible collection targets.}
+
+\subsection{Data Collection}
+% Original scaffold TODO: Describe video sources, inclusion criteria,
+% cultural coverage, licensing, and filtering.
+The following pipeline is a proposed construction protocol. The retrieved
+pilot links establish candidate sources, not a completed benchmark or a
+verified estimate of collection yield.
+
+\paragraph{Sources and retrieval.}
+The pilot uses publicly discoverable YouTube videos. We propose searching
+for combinations of a cultural form or component and a second component
+or context. Queries may use local names, transliterations, and the
+language of the receiving community. For example, a practice name can be
+combined with a local event or institution. Model assistance may suggest
+queries and related entities, but a retrieved title or model judgment
+does not establish a gold label. Each candidate should retain its source
+URL, video identifier, retrieval date, exact query, query language, and
+any parent query used for expansion.
+\todo{Confirm source platforms, retrieval budgets, search models, and the saved query log.}
+
+\paragraph{Screening and evaluation units.}
+Reviewers should inspect the audiovisual content to confirm that the
+proposed cues are observable and belong to a coherent scene or event. They should
+also record whether the cultural interpretation depends on a title,
+description, subtitle, or other external information. A video's uploader
+location alone is insufficient evidence of a cultural context. Source
+videos and evaluation clips are different units: a long source may
+contain several relevant intervals. We propose retaining the source
+identifier and original timestamps when extracting an event, and storing
+discontinuous cue evidence as multiple intervals.
+\todo{Set source-duration filters, evaluation-clip limits, resolution requirements, and repeated-event handling.}
+
+\paragraph{Rights and duplication.}
+Public accessibility does not establish permission to redistribute a
+video. The source record should include the license or permission status
+and the intended release format. Duplicate video identifiers should be
+merged. Reuploads, overlapping clips, and recordings of the same event
+should be grouped before any data split, with manual review of suspected
+matches.
+\todo{Confirm the rights-review process, redistribution policy, duplicate-detection method, and split grouping rules.}
+
+\subsection{Annotation and Quality Control}
+% Original scaffold TODO: Describe annotator backgrounds, annotation stages,
+% agreement checks, and adjudication.
+We propose separating a factual scene description from a cultural note.
+The first records visible or audible events without assigning unobserved
+intent. The second explains the cultural association and records its
+supporting source or relevant expertise. This separation makes it
+possible to audit a correct cultural claim that lacks evidence in the
+particular video.
+
+For each retained event, annotators would identify cue instances, assign
+component types and cultural associations, and mark supporting evidence
+channels and intervals. They would then label candidate relations between
+specified cues and their participating entities or contexts. Relation annotations may contain more than one edge
+per event; a single forced video-level category would hide valid
+combinations. The task definitions and proposed role inventory appear in
+Section~\ref{sec:tasks}.
+
+Independent annotation should precede adjudication. Annotators should
+have relevant knowledge of the traditions they label, with a way to flag
+uncertainty and request additional review. The original search query and
+retrieval label should be hidden during independent annotation to reduce
+confirmation bias. Unresolved associations or roles should be retained
+as uncertain rather than silently converted into a single gold answer.
+\todo{Confirm recruitment, cultural expertise, annotation languages, compensation, number of judgments per item, and adjudication procedure.}
+
+Quality control should report agreement separately for cue recognition,
+cultural association, evidence channels, relation frames, and role
+assignment. A pilot should test both clear examples and boundary cases,
+including whether embedding and realization can be distinguished
+reliably. A relation class should enter the main evaluation only after
+its instructions produce reproducible judgments.
+\todo{Choose agreement measures and acceptance criteria; report measured agreement after the pilot.}
+
+\subsection{Dataset Statistics}
+\todo{Report verified dataset statistics and distributions.}
+The final report should distinguish retrieved sources, screened sources,
+accepted events, released clips, cue instances, and task items. It should
+also report duration, domain and cultural coverage, evidence-channel
+combinations, relation frequencies, unresolved cases, rejection reasons,
+and rights status. Counts from retrieval should not be presented as
+counts of annotated examples.

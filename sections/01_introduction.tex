@@ -1,0 +1,50 @@
+\section{Introduction}
+\label{sec:introduction}
+
+% Original scaffold TODO: motivation, gap, benchmark, and contributions.
+Video understanding involves knowledge about the practices, objects, and social settings that a video depicts.
+A model may recognize a procession or a meal yet miss the particular tradition that gives it meaning.
+Cultural benchmarks therefore ask models to interpret content across communities and languages, rather than assume that performance on a general benchmark transfers uniformly to every cultural setting.
+This concern motivates cultural image and video benchmarks
+\citep{nayak-etal-2024-benchmarking,shafique-etal-2025-culturally,Singh_2026_CVPR}.
+
+Cultural cues also appear together in ways that do not fit a single label for the whole video.
+Consider a lion dance performed during a community event outside China.
+The form, the participants, the event, and the language heard in the recording may have different cultural associations.
+The setting can help explain the event without changing the identity of the performance.
+Similarly, a recognizable textile may become part of a garment associated with another tradition.
+These examples motivate cultural mixing as an evaluation setting that includes coexistence and recontextualization as well as adaptation and fusion.
+% Illustrative examples, not claims about adjudicated benchmark items.
+
+Existing work provides several parts of this evaluation problem.
+Cultural question answering assesses knowledge about culturally situated content.
+Mixed-context image evaluation examines whether a target remains recognizable when other cultural cues are present \citep{Kim_2026_CVPR}.
+Video adds procedures, changing social roles, speech, music, and evidence that may recur at separated moments.
+An assessment of cultural mixing should therefore establish both which cues are present and how the evidence supports their interpretation.
+It should also distinguish recognizing two cues from understanding the relation between them.
+Section~\ref{sec:related-work} discusses the relevant precedents and the limits of our comparison.
+
+We develop \benchmark{} around this distinction.
+The basic unit is a culturally associated cue instance, such as a practice, material, sound, visible text, or event setting.
+Each cue has a description, a component type, one or more supported cultural associations, and an evidence record.
+The proposed core tasks ask models to recover these cues and identify the channels that support them.
+A candidate relation task connects cues and their participating entities or contexts through a relation frame with explicit roles.
+For example, a practice and the group performing it occupy different roles; two parallel cultural displays may instead have a symmetric relation.
+Role assignment expresses the organization visible in a sample, without asserting the historical direction of cultural influence.
+
+Our initial retrieval exploration focused on performing arts and media adaptations.
+The intended scope also includes food, clothing and materials, ceremonies, craft, and other everyday practices.
+\todo{Confirm the final domain coverage after audiovisual screening.}
+Candidate videos are not gold annotations, and retrieval labels are not treated as evidence of the relationship.
+The construction plan separates discovery, audiovisual verification, cultural interpretation, and adjudication.
+The separation between curation, annotations, derived tasks, and modality-specific evaluation follows the useful organizational pattern of v-HUB \citep{shi2025vhub}.
+
+The contributions of this design draft are as follows:
+\begin{itemize}
+    \item An operational scope for cultural mixing in video that includes coexistence, recontextualization, and adaptation, together with explicit limits on claims about identity and origin.
+    \item A cue representation that separates cultural association, component type, and supporting modality.
+    \item Two proposed core tasks and a candidate relation-frame and role task, with diagnostic settings that isolate their different sources of error.
+    \item A planned evaluation of visual and audiovisual models, including controls for text-only shortcuts and culturally mixed context.
+\end{itemize}
+% These are design contributions. Do not convert them to completed release or empirical claims yet.
+\todo{Replace design-stage contribution wording only after dataset validation and experiments are complete.}
