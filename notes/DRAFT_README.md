@@ -14,8 +14,8 @@ The manuscript uses **CulMix-Video** throughout. Its working question is whether
 ## Status conventions
 
 - All construction procedures and model selections are proposals unless explicitly described as a prior pilot observation.
-- Red `\todo{...}` marks unresolved manuscript details. Search this literal command before submission.
-- No dataset total, annotation agreement, model score, ranking, or empirical conclusion is asserted for CulMix-Video.
+- Red `\todo{...}` marks specific decisions in drafted sections.
+- Dataset Statistics, Implementation Details, Results and Analysis, Conclusion, Ethical Considerations, Limitations, and Protocol and Release Audit contain only headings.
 - Core task candidates: cultural cue recognition and cue-modality attribution.
 - Exploratory task: relation frames and roles. The six-frame inventory, five-frame alternative, node types, and single-versus-multiple-relation output are unresolved.
 - Optional grounding, multilingual consistency, context comparisons, and compositional splits are not additional confirmed deliverables.
@@ -28,6 +28,6 @@ MINERVA-Cultural is cited under its verified proceedings title, CURVE. The paper
 
 ## Files and existing work
 
-The draft fills the existing `sections/00_abstract.tex` through `sections/10_appendix.tex`, updates `main.tex`, and populates `references.bib`. Original scaffold placeholders remain as comments where replaced. The ACL style files are unchanged. Pre-existing README changes and template-file deletions are outside this writing change and remain untouched. Generated local build files are not source deliverables.
+The draft uses `main.tex`, the section files in `sections/`, and `references.bib`. The files in `sections/` include both drafted content and headings for future sections.
 
 The draft is intentionally longer than a final submission outline. Venue-specific length, track, and ACL 2027 formatting requirements remain to be checked when preparing the submission.

@@ -10,7 +10,7 @@ Date: 9 November 2026. This is an author discussion record, not a completed expe
 - The user prefers a few meaningful tasks. Directed relation and role classification is an explicitly favored research direction, but its ontology has not been approved.
 - Previous conversation reports 30 collected candidate links. Those are retrieval candidates, not a verified dataset size or completed annotation study.
 - The user reported three potentially suitable examples among 30 manually inspected search results in an earlier search experiment. This is an informal observation, not a controlled comparison of search methods.
-- The current paper is an ACL review-mode scaffold with section files and an empty bibliography. Existing unrelated Git deletions and untracked outputs belong to the user and must remain untouched.
+- The paper uses the existing ACL review-mode scaffold and section files.
 
 ## Working design inferred from the discussion
 
@@ -53,6 +53,6 @@ The supplied world-modelling guidelines emphasize observable actions, local prac
 
 ## Source and completion status
 
-The bibliography begins empty. Recommended additions are listed with verified identifiers in the reference audit notes before their official entries are imported. No experiments or annotation agreements have been measured for this draft. All unsettled manuscript details must retain visible `\todo{...}` markers.
+The reference audit notes document the bibliography entries and their verified identifiers. Sections awaiting substantive content contain only headings. The `\todo{...}` markers in drafted sections identify specific decisions.
 
 The supplied directory is a local GitHub checkout. The user confirmed during drafting that this GitHub repository is connected to Overleaf and asked us to continue without waiting for replies. Use the existing repository as the delivery route. Do not claim that the live Overleaf UI was independently checked.

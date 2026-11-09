@@ -6,12 +6,11 @@ Date: 2026-11-09. This report concerns the manuscript and its references, not va
 
 - `main.tex` compiles with pdfLaTeX, BibTeX, and `latexmk` using the existing ACL style.
 - A separate clean build using only the manuscript sources, bibliography, and ACL style files also succeeded. No pre-existing auxiliary files are required.
-- The current PDF contains 11 pages, including references and the draft appendix.
+- The revised PDF contains 9 pages, including references and the appendix.
 - All 25 cited keys resolve to bibliography entries. No duplicate keys or undefined citations remain.
-- No overfull boxes were reported. Some underfull spacing warnings remain in the two-column layout; they do not indicate clipped content.
-- All PDF pages were rendered and visually inspected for clipping, overlapping text, missing references, and broken section layout; none was observed.
-- The manuscript contains 39 active `\todo{...}` markers. They are indexed in `TODO_INDEX.md`; replaced scaffold placeholders remain in comments.
-- The draft preserves the existing section files and ACL style files. The conclusion is moved before the unnumbered ethics and limitations sections, with an explanatory source comment.
+- The final log reports some underfull spacing and zero overfull boxes.
+- The manuscript contains 27 active `\todo{...}` markers, indexed in `TODO_INDEX.md`.
+- Dataset Statistics, Implementation Details, Results and Analysis, Conclusion, Ethical Considerations, Limitations, and Protocol and Release Audit contain only headings.
 
 ## Evidence and terminology checks
 

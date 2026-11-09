@@ -22,7 +22,6 @@ Mixed-context image evaluation examines whether a target remains recognizable wh
 Video adds procedures, changing social roles, speech, music, and evidence that may recur at separated moments.
 An assessment of cultural mixing should therefore establish both which cues are present and how the evidence supports their interpretation.
 It should also distinguish recognizing two cues from understanding the relation between them.
-Section~\ref{sec:related-work} discusses the relevant precedents and the limits of our comparison.
 
 We develop \benchmark{} around this distinction.
 The basic unit is a culturally associated cue instance, such as a practice, material, sound, visible text, or event setting.
@@ -35,16 +34,9 @@ Role assignment expresses the organization visible in a sample, without assertin
 Our initial retrieval exploration focused on performing arts and media adaptations.
 The intended scope also includes food, clothing and materials, ceremonies, craft, and other everyday practices.
 \todo{Confirm the final domain coverage after audiovisual screening.}
-Candidate videos are not gold annotations, and retrieval labels are not treated as evidence of the relationship.
-The construction plan separates discovery, audiovisual verification, cultural interpretation, and adjudication.
-The separation between curation, annotations, derived tasks, and modality-specific evaluation follows the useful organizational pattern of v-HUB \citep{shi2025vhub}.
 
-The contributions of this design draft are as follows:
 \begin{itemize}
-    \item An operational scope for cultural mixing in video that includes coexistence, recontextualization, and adaptation, together with explicit limits on claims about identity and origin.
-    \item A cue representation that separates cultural association, component type, and supporting modality.
-    \item Two proposed core tasks and a candidate relation-frame and role task, with diagnostic settings that isolate their different sources of error.
-    \item A planned evaluation of visual and audiovisual models, including controls for text-only shortcuts and culturally mixed context.
+    \item We define cultural mixing in video to include coexistence, recontextualization, and adaptation.
+    \item We represent each cue through its cultural associations, component type, and supporting evidence.
+    \item We propose tasks for cue recognition and modality attribution, plus a candidate task for classifying relations and assigning roles. Modality and text-only controls test which inputs support each prediction.
 \end{itemize}
-% These are design contributions. Do not convert them to completed release or empirical claims yet.
-\todo{Replace design-stage contribution wording only after dataset validation and experiments are complete.}

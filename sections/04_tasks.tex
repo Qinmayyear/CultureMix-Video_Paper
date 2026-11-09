@@ -3,7 +3,6 @@
 
 % Original scaffold TODOs: task inputs, outputs, capabilities, construction, metrics, ambiguity.
 We propose two core tasks and one exploratory relation task.
-All task settings below are design proposals; no performance has been measured.
 \todo{Confirm the final task set and freeze the annotation schema before test construction.}
 
 \subsection{Cultural Cue Recognition}
@@ -11,10 +10,9 @@ All task settings below are design proposals; no performance has been measured.
 \paragraph{Input and output.}
 The input is a video unit with the modalities specified by its evaluation condition.
 The output is a set of records $\{(c_i,A_i,k_i)\}$, where $c_i$ is a cue concept, $A_i$ is its set of cultural associations, and $k_i$ is its component type.
-For this core task, the working proposal aggregates repeated occurrences
-by concept within the evaluation unit and records their supported
-associations together. The relation task retains separate instance
-identifiers; recognition alone does not recover those bindings.
+Cue recognition pools the supported associations of repeated occurrences
+of a concept within an evaluation unit. The relation task uses separate
+instance identifiers.
 The main condition does not supply the expected cues, a search query, or an uploader title.
 The model may return an empty set or state that the available evidence does not support a more specific association.
 
@@ -48,7 +46,6 @@ The presence of music alone does not establish that music supports the cultural 
 Annotators must identify a relevant passage, action, object, or sound and explain its connection to the cue.
 A textual assertion inside a video is distinguished from a direct depiction of the practice.
 Providing the cue isolates evidence attribution from cue-discovery errors.
-An end-to-end condition can later use predicted cues.
 
 \paragraph{Scoring and controls.}
 The proposed metrics are micro-F1, macro-F1, and exact-set match over channel labels.
@@ -70,7 +67,6 @@ This is a classification task over situated elements, not over country names.
 \todo{Confirm the node types and whether relations with more than two participants require an explicit result node or an event-level record.}
 
 \paragraph{Candidate frames.}
-The following inventory is provisional:
 \begin{description}
     \item[Co-presence.] Two \emph{participants} share a coherent scene or event. This relation alone makes no claim about their integration.
     \item[Embedding.] An \emph{element} occurs within a receiving \emph{context}, such as an event, institution, or place.
@@ -104,7 +100,6 @@ In \emph{joint frame and role classification}, target nodes are provided and bot
 The first setting separates role confusion from frame confusion.
 Node descriptions must not state the target relation.
 Because semantic types such as ``troupe'' and ``dance'' can still reveal roles, a node-text-only baseline is essential.
-High oracle accuracy alone does not demonstrate video understanding.
 \todo{Construct balanced node pairs and matched video alternatives to measure gains beyond description-only prediction.}
 
 \paragraph{Metrics.}

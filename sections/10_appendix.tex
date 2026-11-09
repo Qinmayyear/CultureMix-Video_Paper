@@ -1,12 +1,8 @@
 \section{Additional Benchmark Details}
 \label{sec:appendix-benchmark}
 
-\todo{Add supplementary examples, annotation instructions, prompts, and extended results as they become available.}
-
 \subsection{Proposed Annotation Record}
 \label{sec:annotation-record}
-The record below specifies proposed fields rather than completed
-annotations. \todo{Freeze field names and allowed values after the pilot.}
 
 \paragraph{Source and event.}
 Store the source identifier and URL, collection date, query provenance,
@@ -35,11 +31,10 @@ supported by audiovisual evidence, additional metadata, or neither.
 The ordering of node identifiers is not a semantic direction. Preserve
 the evidence supporting the relation itself, since evidence that two
 cues exist does not necessarily explain how they are connected.
+\todo{Freeze field names and allowed values after the pilot.}
 
 \subsection{Boundary Cases for Adjudication}
 \label{sec:boundary-cases}
-The following cases should be included in the annotation pilot:
-
 \begin{itemize}
     \item A recognizable practice occurs in a different country, but no
     cue in the video identifies the receiving context. This may require
@@ -58,12 +53,3 @@ The following cases should be included in the annotation pilot:
 
 \subsection{Protocol and Release Audit}
 \label{sec:release-audit}
-Before fixing the test set, the authors should verify that each gold
-claim has an evidence record, each external cultural association has a
-documented basis, and each released asset has an appropriate rights
-record. Adjudication should retain the original judgments, disagreement
-reason, final decision, and decision date. Related events and reuploads
-must remain in the same split. The protocol should record any exclusions
-made after model evaluation so that the test set is not silently changed
-in response to model errors.
-\todo{Add the final annotation manual, representative adjudicated examples, split manifest, and release audit.}

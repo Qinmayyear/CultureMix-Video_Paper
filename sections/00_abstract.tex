@@ -1,11 +1,9 @@
 % Original scaffold TODO: summarize motivation, benchmark design, tasks, evaluation, and findings.
 Cultural practices often travel across communities, languages, and settings.
 A video may show a familiar dance performed by a different community, a dish prepared with ingredients from another tradition, or a story adapted through another art form.
-Recognizing the elements separately does not establish whether a model understands their relationship.
-We present the design of \benchmark{}, a benchmark for understanding cultural mixing in real-world video.
-The proposed annotation represents cultural cues, their cultural associations, their component types, and the visual, auditory, or textual evidence supporting them.
+These examples require models to recognize cultural cues and understand how they relate.
+We propose \benchmark{}, a benchmark for understanding cultural mixing in real-world video.
+Each cue is described by its cultural associations, component type, and supporting visual, auditory, or textual evidence.
 Two core tasks assess cue recognition and evidence-modality attribution.
 A candidate task additionally asks models to identify a relation frame and assign its participants to semantic roles, while allowing symmetric relations and insufficient evidence.
-The planned evaluation separates recognition errors from role-assignment errors and tests dependence on cue descriptions and surrounding context.
-This draft specifies the scope and evaluation design; it does not report completed annotation or model experiments.
-\todo{Confirm the released task set, dataset coverage, and title; add verified empirical findings after evaluation.}
+The evaluation separates recognition errors from role-assignment errors and uses text-only controls to test what the video contributes.
